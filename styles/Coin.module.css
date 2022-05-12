@@ -1,0 +1,13 @@
+.row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.row button {
+  height: 24px;
+  width: 24px;
+}
+
+.row img {
+  height: 24px;
+  width: 24px;
+}
