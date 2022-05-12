@@ -10,6 +10,7 @@ Working so far:
 
 TODO:
 - I should probably switch to context
+- Localstorage persistance
 - Individual coin info, each on its own dynamic route
 - Lotsa styling, +themes
 - 🤔
