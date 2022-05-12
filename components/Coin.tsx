@@ -19,7 +19,7 @@ const Coin: NextPage<{
       <div className={styles["name-container"]}>
         <img src={coin.image} alt="" />
         <span>{coin.name}</span>
-        <span>{coin.symbol}</span>
+        <span> {coin.symbol}</span>
       </div>
       <span>{coin.current_price}</span>
       <span>{`${coin.price_change_percentage_24h.toFixed(
