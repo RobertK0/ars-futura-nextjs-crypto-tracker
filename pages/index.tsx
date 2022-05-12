@@ -13,6 +13,7 @@ const Home: NextPage = () => {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [showFav, setShowFav] = useState<Boolean>(false);
   const [page, setPage] = useState<string>("1");
+  const [loading, setLoading] = useState<Boolean>(true);
 
   const toggleFavoriteHandler = function (id: string) {
     setFavorites((prevState) => {
@@ -28,18 +29,24 @@ const Home: NextPage = () => {
   const switchPageHandler = function (next: Boolean) {
     if (!next) {
       setPage((prevPage) => {
-        if (prevPage !== "1") return (+prevPage - 1).toString();
-        else return "1";
+        if (prevPage !== "1") {
+          setLoading(true);
+          return (+prevPage - 1).toString();
+        } else return "1";
       });
     } else {
       setPage((prevPage) => {
+        setLoading(true);
         return (+prevPage + 1).toString();
       });
     }
   };
 
   useEffect(() => {
-    getCoinsData(page).then((res) => setCoins(res));
+    getCoinsData(page).then((res) => {
+      setCoins(res);
+      setLoading(false);
+    });
   }, [page]);
 
   let filteredCoins: CoinType[] = coins;
@@ -71,7 +78,11 @@ const Home: NextPage = () => {
         setSearchTerm={setSearchTerm}
         searchTerm={searchTerm}
       />
-      <div className={styles.container}>{coinsJSX}</div>
+      {loading ? (
+        <div className={styles.spinner}></div>
+      ) : (
+        <div className={styles.container}>{coinsJSX}</div>
+      )}
       <Pagination page={page} switchPage={switchPageHandler} />
     </main>
   );

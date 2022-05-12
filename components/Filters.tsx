@@ -29,7 +29,7 @@ const Filters: NextPage<{
         className={props.showFav ? styles.shown : ""}
         onClick={favToggleHandler}
       >
-        Show/hide favourites
+        {props.showFav ? "Hide" : "Show"} favourites
       </button>
     </div>
   );

@@ -20,6 +20,9 @@
 }
 
 .container button {
+  font-size: 16px;
+  text-transform: uppercase;
+
   background-color: transparent;
   border: 1px solid #6fffe9;
   border-radius: 50px;
