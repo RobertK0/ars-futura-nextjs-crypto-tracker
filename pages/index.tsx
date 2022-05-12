@@ -64,15 +64,15 @@ const Home: NextPage = () => {
     });
 
   return (
-    <>
+    <main className={styles.main}>
       <Filters
         toggleShowFav={toggleShowFav}
         setSearchTerm={setSearchTerm}
         searchTerm={searchTerm}
       />
       <div className={styles.container}>{coinsJSX}</div>
-      <Pagination switchPage={switchPageHandler} />
-    </>
+      <Pagination page={page} switchPage={switchPageHandler} />
+    </main>
   );
 };
 

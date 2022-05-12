@@ -1,10 +1,33 @@
 .row {
   display: grid;
-  grid-template-columns: 0.2fr 0.2fr repeat(5, 1fr);
+  align-items: center;
+  grid-template-columns: 0.2fr 0.2fr 1.5fr 1fr 1fr 1fr 1fr;
+  padding: 12px 0;
 }
+
 .row button {
-  height: 24px;
-  width: 24px;
+  height: 32px;
+  width: 32px;
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.name-container {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.symbol {
+  font-weight: 500;
+}
+
+.row button:hover {
+  background-color: rgb(255, 197, 89);
 }
 
 .row img {
