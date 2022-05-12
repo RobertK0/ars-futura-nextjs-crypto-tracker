@@ -5,11 +5,16 @@ import styles from "../styles/Search.module.css";
 const Filters: NextPage<{
   searchTerm: string;
   setSearchTerm: Function;
+  toggleShowFav: Function;
 }> = (props) => {
   const searchHandler = function (
     e: React.ChangeEvent<HTMLInputElement>
   ) {
     props.setSearchTerm(e.target.value);
+  };
+
+  const favToggleHandler = function () {
+    props.toggleShowFav();
   };
   return (
     <div className={styles.container}>
@@ -19,7 +24,7 @@ const Filters: NextPage<{
         value={props.searchTerm}
         onChange={searchHandler}
       />
-      <button>Favorites</button>
+      <button onClick={favToggleHandler}>Favorites</button>
     </div>
   );
 };

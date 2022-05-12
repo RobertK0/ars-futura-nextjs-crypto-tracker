@@ -11,6 +11,7 @@ const Home: NextPage = () => {
   const [coins, setCoins] = useState<CoinType[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [favorites, setFavorites] = useState<string[]>([]);
+  const [showFav, setShowFav] = useState<Boolean>(false);
   const [page, setPage] = useState<string>("1");
 
   const toggleFavoriteHandler = function (id: string) {
@@ -18,6 +19,10 @@ const Home: NextPage = () => {
       if (!prevState.includes(id)) return [...prevState, id];
       else return [...prevState].filter((coin) => coin !== id);
     });
+  };
+
+  const toggleShowFav = function () {
+    setShowFav((prevState) => !prevState);
   };
 
   const switchPageHandler = function (next: Boolean) {
@@ -40,6 +45,10 @@ const Home: NextPage = () => {
   let filteredCoins: CoinType[] = coins;
 
   const coinsJSX = filteredCoins
+    .filter((coin) => {
+      if (!showFav) return true;
+      return favorites.includes(coin.id);
+    })
     .filter((coin) =>
       coin.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
@@ -57,6 +66,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Filters
+        toggleShowFav={toggleShowFav}
         setSearchTerm={setSearchTerm}
         searchTerm={searchTerm}
       />
