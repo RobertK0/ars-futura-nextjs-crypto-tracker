@@ -66,6 +66,7 @@ const Home: NextPage = () => {
   return (
     <main className={styles.main}>
       <Filters
+        showFav={showFav}
         toggleShowFav={toggleShowFav}
         setSearchTerm={setSearchTerm}
         searchTerm={searchTerm}
