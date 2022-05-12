@@ -9,8 +9,9 @@ Working so far:
 - Pagination
 
 TODO:
+- Add the table head and thingies
 - I should probably switch to context
-- Localstorage persistance
+- Localstorage persistence
 - Individual coin info, each on its own dynamic route
 - Lotsa styling, +themes
 - 🤔
