@@ -22,3 +22,7 @@ TODO:
 - Individual coin info, each on its own dynamic route
 - Lotsa styling, +themes
 - 🤔
+
+Screenshots:
+ ![Screenshot](https://i.imgur.com/gKXzbUQ.png)
+ ![Screenshot](https://i.imgur.com/o815eBu.png)
