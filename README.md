@@ -8,6 +8,7 @@ Working so far:
 - Filtering by favourites
 - Pagination
 - Vercel CD
+- Viewing individual coin details, each on its own dynamic route
 
 TODO:
 - Definitely should use a graphing library for the price graphs, instead of mapping 168 svg containing divs for each data point and drawing svg lines between them; was curious though if I could hack it together 
