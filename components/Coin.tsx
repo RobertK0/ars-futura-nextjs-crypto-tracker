@@ -18,18 +18,18 @@ const Coin: NextPage<{
       <span>{coin.market_cap_rank}</span>
       <div className={styles["name-container"]}>
         <img src={coin.image} alt="" />
-        <span>{coin.name}</span>
+        <span>{coin.name} |</span>
         <span className={styles.symbol}>
           {" "}
           {coin.symbol.toUpperCase()}
         </span>
       </div>
-      <span>{coin.current_price.toFixed(2)}</span>
+      <span>$ {coin.current_price.toFixed(2)}</span>
       <span>{`${coin.price_change_percentage_24h.toFixed(
         2
       )}%`}</span>
-      <span>{coin.ath.toFixed(2)}</span>
-      <span>{coin.market_cap.toFixed(2)}</span>
+      <span>$ {coin.ath.toFixed(2)}</span>
+      <span>$ {coin.market_cap.toFixed(2)}</span>
     </div>
   );
 };

@@ -9,3 +9,7 @@
 .header span:nth-child(1) {
   justify-self: center;
 }
+
+.header span {
+  font-weight: 600;
+}

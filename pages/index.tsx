@@ -7,6 +7,7 @@ import Filters from "../components/Filters";
 import type CoinType from "../models/coin";
 import Pagination from "../components/Pagination";
 import CoinsHeader from "../components/CoinsHeader";
+import Head from "next/head";
 
 const Home: NextPage = () => {
   const [coins, setCoins] = useState<CoinType[]>([]);
@@ -72,26 +73,31 @@ const Home: NextPage = () => {
     });
 
   return (
-    <main className={styles.main}>
-      <Filters
-        showFav={showFav}
-        toggleShowFav={toggleShowFav}
-        setSearchTerm={setSearchTerm}
-        searchTerm={searchTerm}
-      />
+    <>
+      <Head>
+        <title>Crypto Tracker</title>
+      </Head>
+      <main className={styles.main}>
+        <Filters
+          showFav={showFav}
+          toggleShowFav={toggleShowFav}
+          setSearchTerm={setSearchTerm}
+          searchTerm={searchTerm}
+        />
 
-      {loading ? (
-        <div className={styles.spinner}></div>
-      ) : (
-        <div className={styles.container}>
-          <CoinsHeader />
-          {coinsJSX.length === 0
-            ? "Set some coins as favourites to display them here!"
-            : coinsJSX}
-        </div>
-      )}
-      <Pagination page={page} switchPage={switchPageHandler} />
-    </main>
+        {loading ? (
+          <div className={styles.spinner}></div>
+        ) : (
+          <div className={styles.container}>
+            <CoinsHeader />
+            {coinsJSX.length === 0
+              ? "Set some coins as favourites to display them here!"
+              : coinsJSX}
+          </div>
+        )}
+        <Pagination page={page} switchPage={switchPageHandler} />
+      </main>
+    </>
   );
 };
 
