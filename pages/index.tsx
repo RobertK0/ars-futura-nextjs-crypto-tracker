@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   const [favorites, setFavorites] = useState<string[]>(
     (typeof window !== "undefined" &&
       JSON.parse(localStorage.getItem("favourites") || "[]")) ||
-      "[]"
+      []
   );
   const [showFav, setShowFav] = useState<Boolean>(false);
   const [page, setPage] = useState<string>("1");
