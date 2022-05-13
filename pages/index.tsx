@@ -90,9 +90,13 @@ const Home: NextPage = () => {
         ) : (
           <div className={styles.container}>
             <CoinsHeader />
-            {coinsJSX.length === 0
-              ? "Set some coins as favourites to display them here!"
-              : coinsJSX}
+            {coinsJSX.length === 0 ? (
+              <span className={styles["error-msg"]}>
+                Set some coins as favourites to display them here!
+              </span>
+            ) : (
+              coinsJSX
+            )}
           </div>
         )}
         <Pagination page={page} switchPage={switchPageHandler} />

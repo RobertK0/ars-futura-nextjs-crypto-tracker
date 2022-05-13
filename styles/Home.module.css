@@ -8,6 +8,13 @@
   box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.15);
 }
 
+.error-msg {
+  display: block;
+  text-align: center;
+  font-weight: 500;
+  margin-top: 32px;
+}
+
 .spinner {
   display: inline-block;
 

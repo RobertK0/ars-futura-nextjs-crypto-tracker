@@ -5,6 +5,8 @@ import getIndividualData from "../../apis/getIndividualData";
 import { useEffect, useState } from "react";
 import styles from "../../styles/coinId.module.css";
 import type IndividualCoin from "../../models/individualCoin";
+import CoinData from "../../components/CoinDetails";
+import Head from "next/head";
 
 const CoinDetail: NextPage = () => {
   const router = useRouter();
@@ -20,16 +22,22 @@ const CoinDetail: NextPage = () => {
     );
   }, [id]);
   console.log(coin);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
-        {coin?.id ? (
-          <h2>{coin.name}</h2>
-        ) : (
-          <div className={styles.spinner}></div>
-        )}
-      </div>
-    </main>
+    <>
+      <Head>
+        <title>Coin Details</title>
+      </Head>
+      <main className={styles.main}>
+        <div className={styles.container}>
+          {coin?.id ? (
+            <CoinData coin={coin} />
+          ) : (
+            <div className={styles.spinner}></div>
+          )}
+        </div>
+      </main>
+    </>
   );
 };
 
