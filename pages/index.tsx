@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Filters from "../components/Filters";
 import type CoinType from "../models/coin";
 import Pagination from "../components/Pagination";
+import CoinsHeader from "../components/CoinsHeader";
 
 const Home: NextPage = () => {
   const [coins, setCoins] = useState<CoinType[]>([]);
@@ -78,10 +79,16 @@ const Home: NextPage = () => {
         setSearchTerm={setSearchTerm}
         searchTerm={searchTerm}
       />
+
       {loading ? (
         <div className={styles.spinner}></div>
       ) : (
-        <div className={styles.container}>{coinsJSX}</div>
+        <div className={styles.container}>
+          <CoinsHeader />
+          {coinsJSX.length === 0
+            ? "Set some coins as favourites to display them here!"
+            : coinsJSX}
+        </div>
       )}
       <Pagination page={page} switchPage={switchPageHandler} />
     </main>

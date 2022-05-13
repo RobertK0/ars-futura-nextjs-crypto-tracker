@@ -24,12 +24,12 @@ const Coin: NextPage<{
           {coin.symbol.toUpperCase()}
         </span>
       </div>
-      <span>{coin.current_price}</span>
+      <span>{coin.current_price.toFixed(2)}</span>
       <span>{`${coin.price_change_percentage_24h.toFixed(
         2
       )}%`}</span>
-      <span>{coin.ath}</span>
-      <span>{coin.market_cap}</span>
+      <span>{coin.ath.toFixed(2)}</span>
+      <span>{coin.market_cap.toFixed(2)}</span>
     </div>
   );
 };
