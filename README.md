@@ -7,10 +7,11 @@ Working so far:
 - Toggling favourites
 - Filtering by favourites
 - Pagination
+- Vercel CD
 
 TODO:
 - Disable pagination or something when viewing favourites, or move those to a separate tab/page all together
-- Add the table head and thingies
+- ~~Add the table head and thingies~~
 - I should probably switch to context
 - Localstorage persistence
 - Individual coin info, each on its own dynamic route
