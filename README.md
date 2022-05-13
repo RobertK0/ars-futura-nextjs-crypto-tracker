@@ -12,7 +12,7 @@ Working so far:
 TODO:
 - Should refactor Coin component into smaller ones, it's messy and going to get messier
 - Disable pagination or something when viewing favourites, or move those to a separate tab/page all together
-- ~~Add the table head and thingies~~
+- ~~Add the table head and thingies~~ done
 - I should probably switch to context
 - Localstorage persistence
 - Individual coin info, each on its own dynamic route
