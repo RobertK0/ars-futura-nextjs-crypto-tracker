@@ -32,9 +32,12 @@ const CoinData: NextPage<{ coin: IndividualCoin }> = ({ coin }) => {
 
   return (
     <div className={styles.grid}>
-      <h2>
-        {coin.name} ({coin.symbol.toUpperCase()})
-      </h2>
+      <div>
+        <img src={coin.image.thumb} alt="" />
+        <h2>
+          {coin.name} ({coin.symbol.toUpperCase()})
+        </h2>
+      </div>
       <h3>Market Cap</h3>
       <h3>Total Volume</h3>
       <div className={styles["price-container"]}>

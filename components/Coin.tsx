@@ -4,11 +4,13 @@ import type { NextPage } from "next";
 import type CoinType from "../models/coin";
 import Link from "next/link";
 
-const Coin: NextPage<{
+type PropsType = {
   coin: CoinType;
   favorite: Function;
   isFav: boolean;
-}> = ({ coin, favorite, isFav }) => {
+};
+
+const Coin: NextPage<PropsType> = ({ coin, favorite, isFav }) => {
   const clickHandler = function (event: React.MouseEvent) {
     favorite(coin.id);
     event.stopPropagation();
@@ -16,6 +18,10 @@ const Coin: NextPage<{
 
   const styles24h =
     coin.price_change_percentage_24h > 0 ? styles.pos : styles.neg;
+
+  const formatCur = Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 2,
+  });
 
   return (
     <Link href={`/coins/${coin.id}`}>
@@ -30,12 +36,12 @@ const Coin: NextPage<{
             {coin.symbol.toUpperCase()}
           </span>
         </div>
-        <span>$ {coin.current_price.toFixed(2)}</span>
+        <span>$ {formatCur.format(coin.current_price)}</span>
         <span
           className={styles24h}
         >{`${coin.price_change_percentage_24h.toFixed(2)}%`}</span>
-        <span>$ {coin.ath.toFixed(2)}</span>
-        <span>$ {coin.market_cap.toFixed(2)}</span>
+        <span>$ {formatCur.format(coin.ath)}</span>
+        <span>$ {formatCur.format(coin.market_cap)}</span>
       </div>
     </Link>
   );

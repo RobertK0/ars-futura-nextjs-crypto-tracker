@@ -12,9 +12,20 @@
   height: 100%;
   width: 100%;
 }
+.point-container:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
 
-.point {
+.point-container:hover::after {
+  content: attr(data-price);
+  width: 100px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
   position: absolute;
-  height: 3px;
-  width: 100%;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  color: black;
+  transform: translate(-50%, 120%);
 }

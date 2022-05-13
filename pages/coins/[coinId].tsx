@@ -21,14 +21,24 @@ const CoinDetail: NextPage = () => {
       }
     );
   }, [id]);
-  console.log(coin);
+
+  const backHandler = function () {
+    router.back();
+  };
 
   return (
     <>
       <Head>
         <title>Coin Details</title>
       </Head>
+
       <main className={styles.main}>
+        <button
+          onClick={backHandler}
+          className={styles["btn-back"]}
+        >
+          {"< Back"}
+        </button>
         {coin?.id ? (
           <div className={styles.container}>
             <CoinData coin={coin} />

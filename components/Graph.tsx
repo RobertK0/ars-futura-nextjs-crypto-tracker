@@ -13,7 +13,11 @@ const Graph: NextPage<{ data: number[] }> = ({ data }) => {
       ((value - minValue) / (maxValue - minValue)) * 100;
 
     return (
-      <div key={index} className={styles["point-container"]}>
+      <div
+        data-price={"$ " + value.toFixed(2)}
+        key={index}
+        className={styles["point-container"]}
+      >
         <svg
           width="100%"
           height="100%"
