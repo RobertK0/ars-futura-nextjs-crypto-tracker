@@ -2,7 +2,9 @@
   display: grid;
   align-items: center;
   grid-template-columns: 0.2fr 0.2fr 1.5fr 1fr 1fr 1fr 1fr;
-  padding: 12px 0;
+  padding: 12px 32px;
+  transition: all 0.3s;
+  cursor: pointer;
 }
 
 .row button {
@@ -14,6 +16,10 @@
   border-radius: 50%;
   transition: all 0.3s;
   cursor: pointer;
+}
+
+.row:hover {
+  background-color: #3a506b;
 }
 
 .name-container {
@@ -33,4 +39,11 @@
 .row img {
   height: 24px;
   width: 24px;
+}
+
+.pos {
+  color: #69db7c;
+}
+.neg {
+  color: #fa5252;
 }

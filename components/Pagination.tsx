@@ -2,10 +2,12 @@ import React from "react";
 import type { NextPage } from "next";
 import styles from "../styles/Pagination.module.css";
 
-const Pagination: NextPage<{
+type PropsType = {
   switchPage: Function;
   page: string;
-}> = (props) => {
+};
+
+const Pagination: NextPage<PropsType> = (props) => {
   const clickHandler = function (next: Boolean) {
     props.switchPage(next);
   };

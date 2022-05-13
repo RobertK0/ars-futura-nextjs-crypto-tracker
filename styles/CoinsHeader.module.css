@@ -2,7 +2,7 @@
   display: grid;
   align-items: center;
   grid-template-columns: 0.2fr 0.2fr 1.5fr 1fr 1fr 1fr 1fr;
-  padding: 12px 0;
+  padding: 12px 32px;
   border-bottom: 2px solid #0b132b;
 }
 
