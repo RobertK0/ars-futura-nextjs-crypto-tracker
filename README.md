@@ -10,6 +10,7 @@ Working so far:
 - Vercel CD
 
 TODO:
+- Definitely should use a graphing library for the price graphs, instead of mapping 168 svg containing divs for each data point and drawing svg lines between them; was curious though if I could hack it together 
 - Automatic price updating every X minutes
 - Mobile/responsive design
 - Should refactor Coin component into smaller ones, it's messy and going to get messier
