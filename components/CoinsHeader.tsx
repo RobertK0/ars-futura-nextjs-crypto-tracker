@@ -10,10 +10,10 @@ const CoinsHeader: NextPage = () => {
       <div className={styles["name-container"]}>
         <span className={styles.symbol}>Name</span>
       </div>
-      <span>Price</span>
-      <span>24h %</span>
-      <span>ATH</span>
-      <span>Market Cap</span>
+      <span className={styles.center}>Price</span>
+      <span className={styles.center}>24h %</span>
+      <span className={styles.center}>ATH</span>
+      <span className={styles.center}>Market Cap</span>
     </div>
   );
 };

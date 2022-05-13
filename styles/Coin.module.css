@@ -32,6 +32,14 @@
   font-weight: 500;
 }
 
+.center {
+  justify-self: center;
+}
+
+.right {
+  justify-self: flex-end;
+}
+
 .row button:hover {
   background-color: rgb(255, 197, 89);
 }

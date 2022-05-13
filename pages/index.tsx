@@ -15,6 +15,7 @@ const Home: NextPage = () => {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [showFav, setShowFav] = useState<Boolean>(false);
   const [page, setPage] = useState<string>("1");
+  const [perPage, setPerPage] = useState<string>("10");
   const [loading, setLoading] = useState<Boolean>(true);
 
   const toggleFavoriteHandler = function (id: string) {
@@ -25,6 +26,13 @@ const Home: NextPage = () => {
   };
 
   const toggleShowFav = function () {
+    setPage("1");
+    setPerPage((prevState) => {
+      setLoading(true);
+      if (prevState !== "250") {
+        return "250";
+      } else return "10";
+    });
     setShowFav((prevState) => !prevState);
   };
 
@@ -45,11 +53,11 @@ const Home: NextPage = () => {
   };
 
   useEffect(() => {
-    getCoinsData(page).then((res) => {
+    getCoinsData(page, perPage).then((res) => {
       setCoins(res);
       setLoading(false);
     });
-  }, [page]);
+  }, [page, perPage]);
 
   let filteredCoins: CoinType[] = coins;
 
@@ -99,7 +107,9 @@ const Home: NextPage = () => {
             )}
           </div>
         )}
-        <Pagination page={page} switchPage={switchPageHandler} />
+        {showFav ? null : (
+          <Pagination page={page} switchPage={switchPageHandler} />
+        )}
       </main>
     </>
   );

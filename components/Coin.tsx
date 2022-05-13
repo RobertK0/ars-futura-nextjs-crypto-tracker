@@ -36,12 +36,18 @@ const Coin: NextPage<PropsType> = ({ coin, favorite, isFav }) => {
             {coin.symbol.toUpperCase()}
           </span>
         </div>
-        <span>$ {formatCur.format(coin.current_price)}</span>
+        <span className={styles.center}>
+          $ {formatCur.format(coin.current_price)}
+        </span>
         <span
-          className={styles24h}
+          className={`${styles24h} ${styles.center}`}
         >{`${coin.price_change_percentage_24h.toFixed(2)}%`}</span>
-        <span>$ {formatCur.format(coin.ath)}</span>
-        <span>$ {formatCur.format(coin.market_cap)}</span>
+        <span className={styles.center}>
+          $ {formatCur.format(coin.ath)}
+        </span>
+        <span className={styles.right}>
+          $ {formatCur.format(coin.market_cap)}
+        </span>
       </div>
     </Link>
   );
