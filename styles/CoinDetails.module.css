@@ -10,3 +10,10 @@
 .graph-container {
   grid-column: 1/-1;
 }
+
+.pos {
+  color: #69db7c;
+}
+.neg {
+  color: #fa5252;
+}

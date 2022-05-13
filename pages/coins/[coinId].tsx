@@ -29,13 +29,13 @@ const CoinDetail: NextPage = () => {
         <title>Coin Details</title>
       </Head>
       <main className={styles.main}>
-        <div className={styles.container}>
-          {coin?.id ? (
+        {coin?.id ? (
+          <div className={styles.container}>
             <CoinData coin={coin} />
-          ) : (
-            <div className={styles.spinner}></div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className={styles.spinner}></div>
+        )}
       </main>
     </>
   );

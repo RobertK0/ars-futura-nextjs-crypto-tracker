@@ -13,6 +13,7 @@ type IndividualCoin = {
     market_cap_rank: number;
     market_cap: { usd: number };
     total_volume: { usd: number };
+    sparkline_7d: { price: number[] };
   };
   ticker: { base: string; target: string; last: number }[];
 };

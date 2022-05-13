@@ -1,0 +1,20 @@
+.container {
+  grid-column: 1/-1;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(168, 1fr);
+}
+
+.point-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.point {
+  position: absolute;
+  height: 3px;
+  width: 100%;
+}
