@@ -12,7 +12,11 @@ import Head from "next/head";
 const Home: NextPage = () => {
   const [coins, setCoins] = useState<CoinType[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [favorites, setFavorites] = useState<string[]>([]);
+  const [favorites, setFavorites] = useState<string[]>(
+    (typeof window !== "undefined" &&
+      JSON.parse(localStorage.getItem("favourites") || "[]")) ||
+      "[]"
+  );
   const [showFav, setShowFav] = useState<Boolean>(false);
   const [page, setPage] = useState<string>("1");
   const [perPage, setPerPage] = useState<string>("10");
@@ -20,8 +24,25 @@ const Home: NextPage = () => {
 
   const toggleFavoriteHandler = function (id: string) {
     setFavorites((prevState) => {
-      if (!prevState.includes(id)) return [...prevState, id];
-      else return [...prevState].filter((coin) => coin !== id);
+      if (!prevState.includes(id)) {
+        const newFavs = [...prevState, id];
+        if (typeof window !== "undefined")
+          localStorage.setItem(
+            "favourites",
+            JSON.stringify(newFavs)
+          );
+        return newFavs;
+      } else {
+        const newFavs = [...prevState].filter(
+          (coin) => coin !== id
+        );
+        if (typeof window !== "undefined")
+          localStorage.setItem(
+            "favourites",
+            JSON.stringify(newFavs)
+          );
+        return newFavs;
+      }
     });
   };
 
