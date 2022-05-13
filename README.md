@@ -10,6 +10,7 @@ Working so far:
 - Vercel CD
 
 TODO:
+- Automatic price updating every X minutes
 - Mobile/responsive design
 - Should refactor Coin component into smaller ones, it's messy and going to get messier
 - Disable pagination or something when viewing favourites, or move those to a separate tab/page all together
