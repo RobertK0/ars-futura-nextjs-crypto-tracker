@@ -12,6 +12,10 @@ const CoinDetail: NextPage = () => {
   const router = useRouter();
   const [coin, setCoin] = useState<IndividualCoin>();
   const id = router.query.coinId;
+  const pageTitle = router.query.coinId
+    ? router.query.coinId[0].toUpperCase() +
+      router.query.coinId.slice(1)
+    : "";
 
   useEffect(() => {
     if (!id) return;
@@ -29,7 +33,7 @@ const CoinDetail: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Coin Details</title>
+        <title>{pageTitle} | Coin Details</title>
       </Head>
 
       <main className={styles.main}>

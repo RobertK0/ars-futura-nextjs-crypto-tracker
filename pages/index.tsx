@@ -85,7 +85,6 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
   }, [page, perPage]);
 
   let filteredCoins: CoinType[] = coins;
-  console.log("a", filteredCoins);
   const coinsJSX = filteredCoins
     .filter((coin) => {
       if (!showFav) return true;
