@@ -9,8 +9,8 @@ import Pagination from "../components/Pagination";
 import CoinsHeader from "../components/CoinsHeader";
 import Head from "next/head";
 
-const Home: NextPage = () => {
-  const [coins, setCoins] = useState<CoinType[]>([]);
+const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
+  const [coins, setCoins] = useState<CoinType[]>(props.initialData);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [favorites, setFavorites] = useState<string[]>(
     (typeof window !== "undefined" &&
@@ -20,7 +20,7 @@ const Home: NextPage = () => {
   const [showFav, setShowFav] = useState<Boolean>(false);
   const [page, setPage] = useState<string>("1");
   const [perPage, setPerPage] = useState<string>("10");
-  const [loading, setLoading] = useState<Boolean>(true);
+  const [loading, setLoading] = useState<Boolean>(false);
 
   const toggleFavoriteHandler = function (id: string) {
     setFavorites((prevState) => {
@@ -81,7 +81,7 @@ const Home: NextPage = () => {
   }, [page, perPage]);
 
   let filteredCoins: CoinType[] = coins;
-
+  console.log("a", filteredCoins);
   const coinsJSX = filteredCoins
     .filter((coin) => {
       if (!showFav) return true;
@@ -135,5 +135,15 @@ const Home: NextPage = () => {
     </>
   );
 };
+
+export async function getServerSideProps() {
+  const data = await getCoinsData("1", "25");
+
+  return {
+    props: {
+      initialData: data,
+    },
+  };
+}
 
 export default Home;
