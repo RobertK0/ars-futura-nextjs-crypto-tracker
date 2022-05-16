@@ -12,15 +12,11 @@ import Head from "next/head";
 const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
   const [coins, setCoins] = useState<CoinType[]>(props.initialData);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [favorites, setFavorites] = useState<string[]>(
-    (typeof window !== "undefined" &&
-      JSON.parse(localStorage.getItem("favourites") || "[]")) ||
-      []
-  );
   const [showFav, setShowFav] = useState<Boolean>(false);
   const [page, setPage] = useState<string>("1");
   const [perPage, setPerPage] = useState<string>("10");
   const [loading, setLoading] = useState<Boolean>(false);
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   const toggleFavoriteHandler = function (id: string) {
     setFavorites((prevState) => {
@@ -72,6 +68,14 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
       });
     }
   };
+
+  useEffect(() => {
+    setFavorites(
+      (typeof window !== "undefined" &&
+        JSON.parse(localStorage.getItem("favourites") || "[]")) ||
+        []
+    );
+  }, []);
 
   useEffect(() => {
     getCoinsData(page, perPage).then((res) => {
@@ -137,7 +141,7 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
 };
 
 export async function getServerSideProps() {
-  const data = await getCoinsData("1", "25");
+  const data = await getCoinsData("1", "10");
 
   return {
     props: {

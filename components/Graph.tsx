@@ -1,43 +1,32 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "../styles/Graph.module.css";
 import type { NextPage } from "next";
+import Chart from "chart.js/auto";
+import getChartConfig from "../config/getChartConfig";
 
 const Graph: NextPage<{ data: number[] }> = ({ data }) => {
-  const maxValue = Math.max(...data);
-  const minValue = Math.min(...data);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const jsx = data.map((value, index) => {
-    const prevPerc =
-      ((data[index - 1] - minValue) / (maxValue - minValue)) * 100;
-    const percentage =
-      ((value - minValue) / (maxValue - minValue)) * 100;
+  useEffect(() => {
+    const context = canvasRef.current?.getContext("2d");
 
-    return (
-      <div
-        data-price={"$ " + value.toFixed(2)}
-        key={index}
-        className={styles["point-container"]}
-      >
-        <svg
-          width="100%"
-          height="100%"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          <line
-            x1="0"
-            y1={-prevPerc + 100}
-            x2="100"
-            y2={-percentage + 100}
-            stroke="white"
-            strokeWidth="2px"
-          />
-        </svg>
-      </div>
-    );
-  });
+    if (!context) return;
+    const myChart = new Chart(context, getChartConfig(data));
 
-  return <div className={styles.container}>{jsx}</div>;
+    return () => {
+      myChart.destroy();
+    };
+  }, []);
+
+  return (
+    <div className={styles.container}>
+      <canvas
+        className={styles["coin-chart"]}
+        id="coin-chart"
+        ref={canvasRef}
+      ></canvas>
+    </div>
+  );
 };
 
 export default Graph;
