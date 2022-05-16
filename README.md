@@ -21,7 +21,7 @@ TODO:
 - ~~Add the table head and thingies~~ done
 - I should probably switch to context
 - ~~Localstorage persistence~~ done
-- Individual coin info, each on its own dynamic route
+- ~~Individual coin info, each on its own dynamic route~~ done
 - Lotsa styling, +themes
 - 🤔
 
