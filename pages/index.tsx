@@ -86,6 +86,11 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
   }, []);
 
   useEffect(() => {
+    getCoinsData(page, perPage).then((res) => {
+      setCoins(res);
+      setLoading(false);
+    });
+
     const timer = setInterval(() => {
       getCoinsData(page, perPage).then((res) => {
         setCoins(res);
