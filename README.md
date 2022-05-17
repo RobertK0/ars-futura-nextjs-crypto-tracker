@@ -1,5 +1,11 @@
 WIP, live site [here](https://ars-futura-nextjs-crypto-tracker.vercel.app/)
 
+Content:
+- [Features](#working-so-far)
+- [Todo](#todo)
+- [Snippets](#pieces-of-code-that-i-will-definitely-come-back-to-look-for-in-the-future)
+- [Screenshots](#screenshots)
+
 # Working so far:
 
 - Fetching data
@@ -40,6 +46,6 @@ const [favorites, setFavorites] = useState<string[]>(
 //Checks if code is being run on server or client by checking typeof window, needs to be in quotation for some reason, if "undefined", means server, short-circuits, goes to fallback "[]", if not, gets localstorage key, which returns null if it doesn't exist, again falling back to "[]"
 ```
 
-Screenshots:
+#### Screenshots:
 ![Screenshot](https://i.imgur.com/gKXzbUQ.png)
 ![Screenshot](https://i.imgur.com/o815eBu.png)
