@@ -7,6 +7,7 @@
   border-radius: 10px;
 
   box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.15);
+  animation: slide-down forwards 1s;
 }
 
 .btn-back {
@@ -50,11 +51,23 @@
   border-color: #fff transparent #fff transparent;
   animation: spin 1.2s linear infinite;
 }
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

@@ -17,7 +17,6 @@
 
 .spinner {
   display: inline-block;
-
   margin: 200px 8px;
   width: 80px;
   height: 80px;
@@ -33,6 +32,33 @@
   border-color: #fff transparent #fff transparent;
   animation: spin 1.2s linear infinite;
 }
+
+.grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+}
+
+.btn-refresh {
+  justify-self: flex-start;
+  font-size: 16px;
+  text-transform: uppercase;
+
+  background-color: transparent;
+  border: 1px solid #5bc0be;
+  border-radius: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #5bc0be;
+}
+
+.btn-refresh:hover {
+  background-color: #5bc0be;
+  color: #0b132b;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

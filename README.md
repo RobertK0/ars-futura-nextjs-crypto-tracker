@@ -28,7 +28,7 @@ WIP, live site [here](https://ars-futura-nextjs-crypto-tracker.vercel.app/)
 - Lotsa styling, + themes
 - 🤔
 
-Pieces of code that I will definitely come back to look for in the future:
+#### Pieces of code that I will definitely come back to look for in the future:
 
 ```javascript
 const [favorites, setFavorites] = useState<string[]>(
@@ -36,11 +36,9 @@ const [favorites, setFavorites] = useState<string[]>(
       JSON.parse(localStorage.getItem("favourites") || "[]")) ||
       []
   );
-  
+
 //Checks if code is being run on server or client by checking typeof window, needs to be in quotation for some reason, if "undefined", means server, short-circuits, goes to fallback "[]", if not, gets localstorage key, which returns null if it doesn't exist, again falling back to "[]"
 ```
-
-
 
 Screenshots:
 ![Screenshot](https://i.imgur.com/gKXzbUQ.png)

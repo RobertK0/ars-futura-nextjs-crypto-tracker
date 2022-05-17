@@ -69,6 +69,14 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
     }
   };
 
+  const refreshHandler = function () {
+    setLoading(true);
+    getCoinsData(page, perPage).then((res) => {
+      setCoins(res);
+      setLoading(false);
+    });
+  };
+
   useEffect(() => {
     setFavorites(
       (typeof window !== "undefined" &&
@@ -78,10 +86,14 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
   }, []);
 
   useEffect(() => {
-    getCoinsData(page, perPage).then((res) => {
-      setCoins(res);
-      setLoading(false);
-    });
+    const timer = setInterval(() => {
+      getCoinsData(page, perPage).then((res) => {
+        setCoins(res);
+        setLoading(false);
+      });
+    }, 60000);
+
+    return () => clearInterval(timer);
   }, [page, perPage]);
 
   let filteredCoins: CoinType[] = coins;
@@ -131,9 +143,20 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
             )}
           </div>
         )}
-        {showFav ? null : (
-          <Pagination page={page} switchPage={switchPageHandler} />
-        )}
+        <div className={styles.grid}>
+          <button
+            onClick={refreshHandler}
+            className={styles["btn-refresh"]}
+          >
+            Refresh
+          </button>
+          {showFav ? null : (
+            <Pagination
+              page={page}
+              switchPage={switchPageHandler}
+            />
+          )}
+        </div>
       </main>
     </>
   );
