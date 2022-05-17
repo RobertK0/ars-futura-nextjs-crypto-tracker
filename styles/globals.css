@@ -41,3 +41,9 @@ a {
   flex-direction: column;
   align-items: center;
 }
+
+@media screen and (max-width: 1500px) {
+  .main > div {
+    width: 80%;
+  }
+}

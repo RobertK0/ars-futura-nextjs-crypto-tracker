@@ -13,7 +13,7 @@ const CoinsHeader: NextPage = () => {
       <span className={styles.center}>Price</span>
       <span className={styles.center}>24h %</span>
       <span className={styles.center}>ATH</span>
-      <span className={styles.center}>Market Cap</span>
+      <span className={styles.right}>Market Cap</span>
     </div>
   );
 };

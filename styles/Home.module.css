@@ -38,6 +38,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
+  margin-bottom: 64px;
 }
 
 .btn-refresh {
@@ -57,6 +58,37 @@
 .btn-refresh:hover {
   background-color: #5bc0be;
   color: #0b132b;
+}
+
+@media screen and (max-width: 1200px) {
+  .btn-refresh {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    padding: 20px 0;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    margin-top: 18px;
+    margin-bottom: 18px;
+  }
+  .btn-refresh {
+    font-size: 12px;
+
+    padding: 10px 20px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .grid {
+    grid-template-rows: 1fr 1fr;
+    row-gap: 12px;
+  }
 }
 
 @keyframes spin {

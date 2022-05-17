@@ -19,3 +19,18 @@
   background-color: #5bc0be;
   color: #000;
 }
+
+@media screen and (max-width: 700px) {
+  .container button {
+    height: 36px;
+    width: 36px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .container {
+    grid-row: 2;
+    grid-column: 1/-1;
+  }
+}

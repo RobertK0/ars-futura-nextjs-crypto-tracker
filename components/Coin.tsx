@@ -26,26 +26,33 @@ const Coin: NextPage<PropsType> = ({ coin, favorite, isFav }) => {
   return (
     <Link href={`/coins/${coin.id}`}>
       <div className={styles.row}>
-        <button onClick={clickHandler}>{isFav ? "★" : "✰"}</button>
-        <span>{coin.market_cap_rank}</span>
+        <button
+          className={styles["btn-favourite"]}
+          onClick={clickHandler}
+        >
+          {isFav ? "★" : "✰"}
+        </button>
+        <span className={styles["mcap-rank"]}>
+          {coin.market_cap_rank}
+        </span>
         <div className={styles["name-container"]}>
-          <img src={coin.image} alt="" />
+          <img className={styles.image} src={coin.image} alt="" />
           <span>{coin.name} |</span>
           <span className={styles.symbol}>
             {" "}
             {coin.symbol.toUpperCase()}
           </span>
         </div>
-        <span className={styles.center}>
+        <span className={styles["cur-price"]}>
           $ {formatCur.format(coin.current_price)}
         </span>
         <span
           className={`${styles24h} ${styles.center}`}
         >{`${coin.price_change_percentage_24h.toFixed(2)}%`}</span>
-        <span className={styles.center}>
+        <span className={styles.ath}>
           $ {formatCur.format(coin.ath)}
         </span>
-        <span className={styles.right}>
+        <span className={styles.mcap}>
           $ {formatCur.format(coin.market_cap)}
         </span>
       </div>
