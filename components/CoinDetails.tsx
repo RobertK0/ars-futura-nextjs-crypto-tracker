@@ -23,7 +23,9 @@ function generateStyles(input: number) {
   return input > 0 ? styles.pos : styles.neg;
 }
 
-const CoinData: NextPage<{ coin: IndividualCoin }> = ({ coin }) => {
+const CoinDetails: NextPage<{ coin: IndividualCoin }> = ({
+  coin,
+}) => {
   const formatCur = Intl.NumberFormat("en-US", {
     minimumFractionDigits: 2,
   });
@@ -32,33 +34,38 @@ const CoinData: NextPage<{ coin: IndividualCoin }> = ({ coin }) => {
 
   return (
     <div className={styles.grid}>
-      <div>
+      <div className={styles["name-container"]}>
         <img src={coin.image.thumb} alt="" />
         <h2>
           {coin.name} ({coin.symbol.toUpperCase()})
         </h2>
       </div>
-      <h3>Market Cap</h3>
-      <h3>Total Volume</h3>
+
       <div className={styles["price-container"]}>
         <span>
           ${formatCur.format(coin.market_data.current_price.usd)}
         </span>
-        <br />
         <span>
           {coin.market_data.current_price.btc.toFixed(8)} BTC
         </span>
       </div>
-      <span>
-        ${formatCur.format(coin.market_data.market_cap.usd)} ({rank}
-        )
-      </span>
-      <span>
-        ${formatCur.format(coin.market_data.total_volume.usd)}
-      </span>
+      <div className={styles["mcap-container"]}>
+        <h3>Market Cap</h3>
+        <span>
+          ${formatCur.format(coin.market_data.market_cap.usd)} (
+          {rank})
+        </span>
+      </div>
+      <div className={styles["volume-container"]}>
+        <h3>Total Volume</h3>
+        <span>
+          ${formatCur.format(coin.market_data.total_volume.usd)}
+        </span>
+      </div>
+
       <div className={styles["change-container"]}>
         <span>24h</span>
-        <br />
+
         <span
           className={generateStyles(
             coin.market_data.price_change_percentage_24h
@@ -69,7 +76,7 @@ const CoinData: NextPage<{ coin: IndividualCoin }> = ({ coin }) => {
       </div>
       <div className={styles["change-container"]}>
         <span>7d</span>
-        <br />
+
         <span
           className={generateStyles(
             coin.market_data.price_change_percentage_7d
@@ -80,7 +87,7 @@ const CoinData: NextPage<{ coin: IndividualCoin }> = ({ coin }) => {
       </div>
       <div className={styles["change-container"]}>
         <span>14d</span>
-        <br />
+
         <span
           className={generateStyles(
             coin.market_data.price_change_percentage_14d
@@ -94,4 +101,4 @@ const CoinData: NextPage<{ coin: IndividualCoin }> = ({ coin }) => {
   );
 };
 
-export default CoinData;
+export default CoinDetails;

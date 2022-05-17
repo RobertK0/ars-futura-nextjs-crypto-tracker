@@ -5,7 +5,7 @@ import getIndividualData from "../../apis/getIndividualData";
 import { useEffect, useState } from "react";
 import styles from "../../styles/coinId.module.css";
 import type IndividualCoin from "../../models/individualCoin";
-import CoinData from "../../components/CoinDetails";
+import CoinDetails from "../../components/CoinDetails";
 import Head from "next/head";
 
 const CoinDetail: NextPage = () => {
@@ -45,7 +45,7 @@ const CoinDetail: NextPage = () => {
         </button>
         {coin?.id ? (
           <div className={styles.container}>
-            <CoinData coin={coin} />
+            <CoinDetails coin={coin} />
           </div>
         ) : (
           <div className={styles.spinner}></div>
