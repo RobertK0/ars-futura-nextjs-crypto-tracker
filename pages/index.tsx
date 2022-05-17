@@ -121,6 +121,10 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
       );
     });
 
+  const errorMsg = showFav
+    ? "Set some coins as favourites to display them here!"
+    : "No coins found.";
+
   return (
     <>
       <Head>
@@ -141,7 +145,7 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
             <CoinsHeader />
             {coinsJSX.length === 0 ? (
               <span className={styles["error-msg"]}>
-                Set some coins as favourites to display them here!
+                {errorMsg}
               </span>
             ) : (
               coinsJSX
