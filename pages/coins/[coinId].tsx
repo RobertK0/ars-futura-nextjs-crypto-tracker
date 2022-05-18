@@ -11,6 +11,7 @@ import Head from "next/head";
 const CoinDetail: NextPage = () => {
   const router = useRouter();
   const [coin, setCoin] = useState<IndividualCoin>();
+  const [error, setError] = useState<string>("");
   const id = router.query.coinId;
   const pageTitle = router.query.coinId
     ? router.query.coinId[0].toUpperCase() +
@@ -19,16 +20,22 @@ const CoinDetail: NextPage = () => {
 
   useEffect(() => {
     if (!id) return;
-    getIndividualData(Array.isArray(id) ? id[0] : id).then(
-      (res) => {
+    getIndividualData(Array.isArray(id) ? id[0] : id)
+      .then((res) => {
         setCoin(res);
-      }
-    );
+      })
+      .catch((err) => setError(err));
   }, [id]);
 
   const backHandler = function () {
     router.back();
   };
+
+  const placeholder = error ? (
+    <div className={styles.container}>{error}</div>
+  ) : (
+    <div className={styles.spinner}></div>
+  );
 
   return (
     <>
@@ -48,7 +55,7 @@ const CoinDetail: NextPage = () => {
             <CoinDetails coin={coin} />
           </div>
         ) : (
-          <div className={styles.spinner}></div>
+          placeholder
         )}
       </main>
     </>

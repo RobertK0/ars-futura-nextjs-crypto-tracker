@@ -21,7 +21,7 @@ const Coin: NextPage<PropsType> = ({ coin, favorite, isFav }) => {
 
   const formatCur = Intl.NumberFormat("en-US", {
     minimumFractionDigits: 2,
-  });
+  }).format;
 
   return (
     <Link href={`/coins/${coin.id}`}>
@@ -44,16 +44,14 @@ const Coin: NextPage<PropsType> = ({ coin, favorite, isFav }) => {
           </span>
         </div>
         <span className={styles["cur-price"]}>
-          $ {formatCur.format(coin.current_price)}
+          $ {formatCur(coin.current_price)}
         </span>
         <span
           className={`${styles24h} ${styles.center}`}
         >{`${coin.price_change_percentage_24h.toFixed(2)}%`}</span>
-        <span className={styles.ath}>
-          $ {formatCur.format(coin.ath)}
-        </span>
+        <span className={styles.ath}>$ {formatCur(coin.ath)}</span>
         <span className={styles.mcap}>
-          $ {formatCur.format(coin.market_cap)}
+          $ {formatCur(coin.market_cap)}
         </span>
       </div>
     </Link>
