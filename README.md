@@ -1,6 +1,7 @@
 WIP, live site [here](https://ars-futura-nextjs-crypto-tracker.vercel.app/)
 
 Content:
+
 - [Features](#working-so-far)
 - [Todo](#todo)
 - [Snippets](#pieces-of-code-that-i-will-definitely-come-back-to-look-for-in-the-future)
@@ -23,10 +24,9 @@ Content:
 # TODO:
 
 - ~~Definitely should use a graphing library for the price graphs, instead of mapping 168 svg containing divs for each data point and drawing svg lines between them; was curious though if I could hack it together~~ done
-- Figure out how to make charts inherit fonts upon loadingdone
+- ~~Figure out how to make charts inherit fonts upon loadingdone~~ done
 - ~~Automatic price updating every X minutes~~ done
 - ~~Mobile/responsive design~~ done
-- Should refactor Coin component into smaller ones, it's messy and going to get messier
 - ~~Disable pagination or something when viewing favourites, or move those to a separate tab/page all together~~ done
 - ~~Add the table head and thingies~~ done
 - I should probably switch to context
@@ -48,6 +48,7 @@ const [favorites, setFavorites] = useState<string[]>(
 ```
 
 #### Screenshots:
+
 ![Screenshot](https://i.imgur.com/gKXzbUQ.png)
 ![Screenshot](https://i.imgur.com/ekrVW8M.png)
 ![Screenshot](https://i.imgur.com/iCFmZiU.png)
