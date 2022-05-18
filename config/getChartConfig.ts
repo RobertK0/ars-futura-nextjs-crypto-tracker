@@ -58,6 +58,7 @@ const getChartConfig = function (data: number[]) {
             },
           },
         },
+        y: { grid: { color: "#ffffff20" } },
       },
       plugins: {
         legend: {

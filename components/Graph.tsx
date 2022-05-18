@@ -11,6 +11,9 @@ const Graph: NextPage<{ data: number[] }> = ({ data }) => {
     const context = canvasRef.current?.getContext("2d");
 
     if (!context) return;
+
+    Chart.defaults.font.family = "Montserrat";
+    Chart.defaults.color = "#fff";
     const myChart = new Chart(context, getChartConfig(data));
 
     return () => {

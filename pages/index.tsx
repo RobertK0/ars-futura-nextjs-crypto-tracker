@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import getCoinsData from "../apis/getCoinsData";
 import styles from "../styles/Home.module.css";
 import Coin from "../components/Coin";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Filters from "../components/Filters";
 import type CoinType from "../models/coin";
 import Pagination from "../components/Pagination";
@@ -18,63 +18,49 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
   const [loading, setLoading] = useState<Boolean>(false);
   const [favorites, setFavorites] = useState<string[]>([]);
 
-  const toggleFavoriteHandler = function (id: string) {
-    setFavorites((prevState) => {
-      if (!prevState.includes(id)) {
-        const newFavs = [...prevState, id];
-        if (typeof window !== "undefined")
-          localStorage.setItem(
-            "favourites",
-            JSON.stringify(newFavs)
-          );
-        return newFavs;
-      } else {
-        const newFavs = [...prevState].filter(
-          (coin) => coin !== id
-        );
-        if (typeof window !== "undefined")
-          localStorage.setItem(
-            "favourites",
-            JSON.stringify(newFavs)
-          );
-        return newFavs;
-      }
-    });
-  };
-
-  const toggleShowFav = function () {
-    setPage("1");
-    setPerPage((prevState) => {
-      setLoading(true);
-      if (prevState !== "250") {
-        return "250";
-      } else return "10";
-    });
-    setShowFav((prevState) => !prevState);
-  };
-
-  const switchPageHandler = function (next: Boolean) {
-    if (!next) {
-      setPage((prevPage) => {
-        if (prevPage !== "1") {
-          setLoading(true);
-          return (+prevPage - 1).toString();
-        } else return "1";
-      });
-    } else {
-      setPage((prevPage) => {
-        setLoading(true);
-        return (+prevPage + 1).toString();
-      });
-    }
-  };
-
-  const refreshHandler = function () {
-    setLoading(true);
+  const getCoins = useCallback((page: string, perPage: string) => {
     getCoinsData(page, perPage).then((res) => {
       setCoins(res);
       setLoading(false);
     });
+  }, []);
+
+  const toggleFavoriteHandler = function (id: string) {
+    setFavorites((prevState) => {
+      const persistData = function (data: string[]) {
+        if (typeof window !== "undefined")
+          localStorage.setItem("favourites", JSON.stringify(data));
+        return data;
+      };
+
+      return persistData(
+        !prevState.includes(id)
+          ? [...prevState, id]
+          : [...prevState].filter((coin) => coin !== id)
+      );
+    });
+  };
+
+  const toggleShowFav = function () {
+    setLoading(true);
+    setPage("1");
+    setPerPage((prevState) => (prevState !== "250" ? "250" : "10"));
+    setShowFav((prevState) => !prevState);
+  };
+
+  const switchPageHandler = function (next: Boolean) {
+    setPage((curPage) =>
+      !next
+        ? curPage !== "1"
+          ? `${+curPage - 1}`
+          : "1"
+        : `${+curPage + 1}`
+    );
+  };
+
+  const refreshHandler = function () {
+    setLoading(true);
+    getCoins(page, perPage);
   };
 
   useEffect(() => {
@@ -86,40 +72,29 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
   }, []);
 
   useEffect(() => {
-    getCoinsData(page, perPage).then((res) => {
-      setCoins(res);
-      setLoading(false);
-    });
+    setLoading(true);
+    getCoins(page, perPage);
 
     const timer = setInterval(() => {
-      getCoinsData(page, perPage).then((res) => {
-        setCoins(res);
-        setLoading(false);
-      });
+      getCoins(page, perPage);
     }, 60000);
 
     return () => clearInterval(timer);
-  }, [page, perPage]);
+  }, [page, perPage, getCoins]);
 
-  let filteredCoins: CoinType[] = coins;
-  const coinsJSX = filteredCoins
-    .filter((coin) => {
-      if (!showFav) return true;
-      return favorites.includes(coin.id);
-    })
-    .filter((coin) =>
-      coin.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const coinsJSX = coins
+    .filter((coin) => !showFav || favorites.includes(coin.id))
+    .filter(({ name }) =>
+      name.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    .map((coin) => {
-      return (
-        <Coin
-          isFav={favorites.includes(coin.id) ? true : false}
-          key={coin.id}
-          favorite={toggleFavoriteHandler}
-          coin={coin}
-        />
-      );
-    });
+    .map((coin) => (
+      <Coin
+        isFav={favorites.includes(coin.id) ? true : false}
+        key={coin.id}
+        favorite={toggleFavoriteHandler}
+        coin={coin}
+      />
+    ));
 
   const errorMsg = showFav
     ? "Set some coins as favourites to display them here!"
