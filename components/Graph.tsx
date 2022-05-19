@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import styles from "../styles/Graph.module.css";
 import type { NextPage } from "next";
+import { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 import getChartConfig from "../config/getChartConfig";
+import styles from "../styles/Graph.module.css";
 
 const Graph: NextPage<{ data: number[] }> = ({ data }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);

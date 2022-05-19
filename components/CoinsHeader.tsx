@@ -1,11 +1,10 @@
-import React from "react";
-import styles from "../styles/CoinsHeader.module.css";
 import type { NextPage } from "next";
+import styles from "../styles/CoinsHeader.module.css";
 
 const CoinsHeader: NextPage = () => {
   return (
     <div className={styles.header}>
-      <span>*</span>
+      <span> </span>
       <span>#</span>
       <div className={styles["name-container"]}>
         <span className={styles.symbol}>Name</span>

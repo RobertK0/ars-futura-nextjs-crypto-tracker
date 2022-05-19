@@ -1,18 +1,15 @@
-import React from "react";
-import styles from "../styles/Coin.module.css";
 import type { NextPage } from "next";
 import type CoinType from "../models/coin";
 import Link from "next/link";
+import { useContext } from "react";
+import Ctx from "../store/ctxProvider";
+import styles from "../styles/Coin.module.css";
 
-type PropsType = {
-  coin: CoinType;
-  favorite: Function;
-  isFav: boolean;
-};
+const Coin: NextPage<{ coin: CoinType }> = ({ coin }) => {
+  const ctx = useContext(Ctx);
 
-const Coin: NextPage<PropsType> = ({ coin, favorite, isFav }) => {
   const clickHandler = function (event: React.MouseEvent) {
-    favorite(coin.id);
+    ctx.setFavorites(coin.id);
     event.stopPropagation();
   };
 
@@ -23,6 +20,8 @@ const Coin: NextPage<PropsType> = ({ coin, favorite, isFav }) => {
     minimumFractionDigits: 2,
   }).format;
 
+  const isFav = ctx.favorites.includes(coin.id) ? "★" : "✰";
+
   return (
     <Link href={`/coins/${coin.id}`}>
       <div className={styles.row}>
@@ -30,7 +29,7 @@ const Coin: NextPage<PropsType> = ({ coin, favorite, isFav }) => {
           className={styles["btn-favourite"]}
           onClick={clickHandler}
         >
-          {isFav ? "★" : "✰"}
+          {isFav}
         </button>
         <span className={styles["mcap-rank"]}>
           {coin.market_cap_rank}
@@ -48,7 +47,7 @@ const Coin: NextPage<PropsType> = ({ coin, favorite, isFav }) => {
         </span>
         <span
           className={`${styles24h} ${styles.center}`}
-        >{`${coin.price_change_percentage_24h.toFixed(2)}%`}</span>
+        >{`${coin.price_change_percentage_24h?.toFixed(2)}%`}</span>
         <span className={styles.ath}>$ {formatCur(coin.ath)}</span>
         <span className={styles.mcap}>
           $ {formatCur(coin.market_cap)}

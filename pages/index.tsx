@@ -1,102 +1,59 @@
 import type { NextPage } from "next";
-import getCoinsData from "../apis/getCoinsData";
-import styles from "../styles/Home.module.css";
-import Coin from "../components/Coin";
-import { useCallback, useEffect, useState } from "react";
-import Filters from "../components/Filters";
 import type CoinType from "../models/coin";
+import Head from "next/head";
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import Ctx from "../store/ctxProvider";
+import Coin from "../components/Coin";
+import Filters from "../components/Filters";
 import Pagination from "../components/Pagination";
 import CoinsHeader from "../components/CoinsHeader";
-import Head from "next/head";
+import LoadingWrapper from "../components/LoadingWrapper";
+import getCoinsData from "../apis/getCoinsData";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
   const [coins, setCoins] = useState<CoinType[]>(props.initialData);
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [showFav, setShowFav] = useState<Boolean>(false);
-  const [page, setPage] = useState<string>("1");
-  const [perPage, setPerPage] = useState<string>("10");
-  const [loading, setLoading] = useState<Boolean>(false);
-  const [favorites, setFavorites] = useState<string[]>([]);
+
+  const ctx = useContext(Ctx);
 
   const getCoins = useCallback((page: string, perPage: string) => {
     getCoinsData(page, perPage).then((res) => {
       setCoins(res);
-      setLoading(false);
+      ctx.setLoading(false);
     });
   }, []);
-
-  const toggleFavoriteHandler = function (id: string) {
-    setFavorites((prevState) => {
-      const persistData = function (data: string[]) {
-        if (typeof window !== "undefined")
-          localStorage.setItem("favourites", JSON.stringify(data));
-        return data;
-      };
-
-      return persistData(
-        !prevState.includes(id)
-          ? [...prevState, id]
-          : [...prevState].filter((coin) => coin !== id)
-      );
-    });
-  };
-
-  const toggleShowFav = function () {
-    setLoading(true);
-    setPage("1");
-    setPerPage((prevState) => (prevState !== "250" ? "250" : "10"));
-    setShowFav((prevState) => !prevState);
-  };
-
-  const switchPageHandler = function (next: Boolean) {
-    setPage((curPage) =>
-      !next
-        ? curPage !== "1"
-          ? `${+curPage - 1}`
-          : "1"
-        : `${+curPage + 1}`
-    );
-  };
 
   const refreshHandler = function () {
-    setLoading(true);
-    getCoins(page, perPage);
+    ctx.setLoading(true);
+    getCoins(ctx.page, ctx.perPage);
   };
 
   useEffect(() => {
-    setFavorites(
-      (typeof window !== "undefined" &&
-        JSON.parse(localStorage.getItem("favourites") || "[]")) ||
-        []
-    );
-  }, []);
-
-  useEffect(() => {
-    setLoading(true);
-    getCoins(page, perPage);
+    ctx.setLoading(true);
+    getCoins(ctx.page, ctx.perPage);
 
     const timer = setInterval(() => {
-      getCoins(page, perPage);
+      getCoins(ctx.page, ctx.perPage);
     }, 60000);
 
     return () => clearInterval(timer);
-  }, [page, perPage, getCoins]);
+  }, [ctx.page, ctx.perPage, getCoins]);
 
   const coinsJSX = coins
-    .filter((coin) => !showFav || favorites.includes(coin.id))
-    .filter(({ name }) =>
-      name.toLowerCase().includes(searchTerm.toLowerCase())
+    .filter(
+      (coin) => !ctx.showFav || ctx.favorites.includes(coin.id)
     )
-    .map((coin) => (
-      <Coin
-        isFav={favorites.includes(coin.id) ? true : false}
-        key={coin.id}
-        favorite={toggleFavoriteHandler}
-        coin={coin}
-      />
-    ));
+    .filter(({ name }) =>
+      name.toLowerCase().includes(ctx.searchTerm.toLowerCase())
+    )
+    .map((coin) => <Coin key={coin.id} coin={coin} />);
 
-  const errorMsg = showFav
+  const errorMsg = ctx.showFav
     ? "Set some coins as favourites to display them here!"
     : "No coins found.";
 
@@ -106,16 +63,8 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
         <title>Crypto Tracker</title>
       </Head>
       <main className={styles.main}>
-        <Filters
-          showFav={showFav}
-          toggleShowFav={toggleShowFav}
-          setSearchTerm={setSearchTerm}
-          searchTerm={searchTerm}
-        />
-
-        {loading ? (
-          <div className={styles.spinner}></div>
-        ) : (
+        <Filters />
+        <LoadingWrapper>
           <div className={styles.container}>
             <CoinsHeader />
             {coinsJSX.length === 0 ? (
@@ -126,7 +75,7 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
               coinsJSX
             )}
           </div>
-        )}
+        </LoadingWrapper>
         <div className={styles.grid}>
           <button
             onClick={refreshHandler}
@@ -134,12 +83,7 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
           >
             Refresh
           </button>
-          {showFav ? null : (
-            <Pagination
-              page={page}
-              switchPage={switchPageHandler}
-            />
-          )}
+          <Pagination />
         </div>
       </main>
     </>
