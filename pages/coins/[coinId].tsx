@@ -1,17 +1,17 @@
-import { useRouter } from "next/router";
-import React from "react";
 import type { NextPage } from "next";
-import getIndividualData from "../../apis/getIndividualData";
-import { useEffect, useState } from "react";
-import styles from "../../styles/coinId.module.css";
 import type IndividualCoin from "../../models/individualCoin";
-import CoinDetails from "../../components/CoinDetails";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import CoinDetails from "../../components/CoinDetails";
+import getIndividualData from "../../apis/getIndividualData";
+import styles from "../../styles/coinId.module.css";
 
 const CoinDetail: NextPage = () => {
-  const router = useRouter();
   const [coin, setCoin] = useState<IndividualCoin>();
   const [error, setError] = useState<string>("");
+  const router = useRouter();
+
   const id = router.query.coinId;
   const pageTitle = router.query.coinId
     ? router.query.coinId[0].toUpperCase() +

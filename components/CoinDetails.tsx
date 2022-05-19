@@ -1,8 +1,7 @@
 import type { NextPage } from "next";
-import React from "react";
-import styles from "../styles/CoinDetails.module.css";
 import type IndividualCoin from "../models/individualCoin";
 import Graph from "./Graph";
+import styles from "../styles/CoinDetails.module.css";
 
 function addSuffix(i: number) {
   var j = i % 10,

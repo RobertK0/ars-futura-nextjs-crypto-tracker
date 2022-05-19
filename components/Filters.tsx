@@ -1,37 +1,35 @@
-import React from "react";
 import type { NextPage } from "next";
+import { useContext } from "react";
+import Ctx from "../store/ctxProvider";
 import styles from "../styles/Filters.module.css";
 
-type PropsType = {
-  searchTerm: string;
-  setSearchTerm: Function;
-  showFav: Boolean;
-  toggleShowFav: Function;
-};
+const Filters: NextPage = () => {
+  const ctx = useContext(Ctx);
 
-const Filters: NextPage<PropsType> = (props) => {
   const searchHandler = function (
     e: React.ChangeEvent<HTMLInputElement>
   ) {
-    props.setSearchTerm(e.target.value);
+    ctx.setSearchTerm(e.target.value);
   };
 
   const favToggleHandler = function () {
-    props.toggleShowFav();
+    ctx.setLoading(true);
+    ctx.toggleShowFav();
   };
+
   return (
     <div className={styles.container}>
       <input
         type="text"
         placeholder="Search"
-        value={props.searchTerm}
+        value={ctx.searchTerm}
         onChange={searchHandler}
       />
       <button
-        className={props.showFav ? styles.shown : ""}
+        className={ctx.showFav ? styles.shown : ""}
         onClick={favToggleHandler}
       >
-        {props.showFav ? "Hide" : "Show"} favourites
+        {ctx.showFav ? "Hide" : "Show"} favourites
       </button>
     </div>
   );

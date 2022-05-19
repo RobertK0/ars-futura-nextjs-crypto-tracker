@@ -1,24 +1,19 @@
-import React from "react";
 import type { NextPage } from "next";
+import { useContext } from "react";
+import Ctx from "../store/ctxProvider";
 import styles from "../styles/Pagination.module.css";
 
-type PropsType = {
-  switchPage: Function;
-  page: string;
-};
+const Pagination: NextPage = () => {
+  const ctx = useContext(Ctx);
 
-const Pagination: NextPage<PropsType> = (props) => {
-  const clickHandler = function (next: Boolean) {
-    props.switchPage(next);
-  };
-
+  if (ctx.showFav) return null;
   return (
     <div className={styles.container}>
-      <button onClick={clickHandler.bind(null, false)}>
+      <button onClick={ctx.setPage.bind(null, false)}>
         {"<<<"}
       </button>
-      <span>{props.page}</span>
-      <button onClick={clickHandler.bind(null, true)}>
+      <span>{ctx.page}</span>
+      <button onClick={ctx.setPage.bind(null, true)}>
         {">>>"}
       </button>
     </div>
