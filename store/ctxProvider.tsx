@@ -77,6 +77,7 @@ export const CtxProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const searchTermChangeHandler = function (term: string) {
+    setPage("1");
     setPerPage(term ? "250" : "10");
     setSearchTerm(term);
   };

@@ -29,7 +29,7 @@ Content:
 - ~~Mobile/responsive design~~ done
 - ~~Disable pagination or something when viewing favourites, or move those to a separate tab/page all together~~ done
 - ~~Add the table head and thingies~~ done
-- I should probably switch to context
+- ~~I should probably switch to context~~ done
 - ~~Localstorage persistence~~ done
 - ~~Individual coin info, each on its own dynamic route~~ done
 - Lotsa styling, + themes
