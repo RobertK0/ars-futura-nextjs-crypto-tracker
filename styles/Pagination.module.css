@@ -7,17 +7,17 @@
 .container button {
   height: 48px;
   width: 48px;
-  background-color: transparent;
-  border: 1px solid #5bc0be;
-  color: #5bc0be;
+  background-color: var(--background);
+  border: 1px solid var(--accent);
+  color: var(--accent);
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s;
 }
 
 .container button:hover {
-  background-color: #5bc0be;
-  color: #000;
+  background-color: var(--accent);
+  color: var(--background);
 }
 
 @media screen and (max-width: 700px) {

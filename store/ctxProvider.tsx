@@ -71,25 +71,29 @@ export const CtxProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const showFavHandler = function () {
+    setLoading(true);
     setPage("1");
     setPerPage((prevState) => (prevState !== "250" ? "250" : "10"));
     setShowFav((prevState) => !prevState);
   };
 
   const searchTermChangeHandler = function (term: string) {
+    setLoading(true);
     setPage("1");
     setPerPage(term ? "250" : "10");
     setSearchTerm(term);
   };
 
   const setPageHandler = function (next: boolean) {
-    setPage((curPage) =>
-      !next
+    setPage((curPage) => {
+      const targetPage = !next
         ? curPage !== "1"
           ? `${+curPage - 1}`
           : "1"
-        : `${+curPage + 1}`
-    );
+        : `${+curPage + 1}`;
+      if (targetPage !== curPage) setLoading(true);
+      return targetPage;
+    });
   };
 
   const setPerPageHandler = function (page: string) {

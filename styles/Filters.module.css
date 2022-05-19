@@ -8,42 +8,42 @@
   width: 300px;
   font-size: 16px;
   font-family: inherit;
-  background-color: transparent;
-  border: 1px solid #5bc0be;
+  background-color: var(--background);
+  border: 1px solid var(--accent);
   border-radius: 50px;
   color: #fff;
   padding: 15px 30px;
 }
 
 .container input::placeholder {
-  color: #5bc0be;
+  color: var(--accent);
 }
 
 .container button {
   font-size: 16px;
   text-transform: uppercase;
 
-  background-color: transparent;
-  border: 1px solid #5bc0be;
+  background-color: var(--background);
+  border: 1px solid var(--accent);
   border-radius: 50px;
   padding: 10px 20px;
   cursor: pointer;
   transition: all 0.3s;
-  color: #5bc0be;
+  color: var(--accent);
 }
 
 .container button:hover {
-  background-color: #5bc0be;
-  color: #0b132b;
+  background-color: var(--accent);
+  color: var(--background);
 }
 
 .container button.shown {
-  background-color: #5bc0be;
-  color: #0b132b;
+  background-color: var(--accent);
+  color: var(--background);
 }
 .container button.shown:hover {
   background-color: transparent;
-  color: #5bc0be;
+  color: var(--accent);
 }
 
 @media screen and (max-width: 1200px) {
