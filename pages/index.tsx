@@ -34,7 +34,6 @@ const Home: NextPage<{ initialData: CoinType[] }> = (props) => {
   };
 
   useEffect(() => {
-    ctx.setLoading(true);
     getCoins(ctx.page, ctx.perPage);
 
     const timer = setInterval(() => {

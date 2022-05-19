@@ -1,11 +1,20 @@
 .container {
   width: 100%;
-  background-color: #1c2541;
+  background-color: rgb(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
   padding: 32px 0;
   margin: 32px 0;
   border-radius: 10px;
-
   box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.15);
+}
+
+/*Firefox pls */
+@supports not (
+  (-webkit-backdrop-filter: none) or (backdrop-filter: none)
+) {
+  .container {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
 }
 
 .error-msg {
@@ -28,18 +37,18 @@
   font-size: 16px;
   text-transform: uppercase;
 
-  background-color: transparent;
-  border: 1px solid #5bc0be;
+  background-color: var(--background);
+  border: 1px solid var(--accent);
   border-radius: 50px;
   padding: 10px 20px;
   cursor: pointer;
   transition: all 0.3s;
-  color: #5bc0be;
+  color: var(--accent);
 }
 
 .btn-refresh:hover {
-  background-color: #5bc0be;
-  color: #0b132b;
+  background-color: var(--accent);
+  color: var(--background);
 }
 
 @media screen and (max-width: 1200px) {
@@ -69,4 +78,3 @@
     row-gap: 12px;
   }
 }
-

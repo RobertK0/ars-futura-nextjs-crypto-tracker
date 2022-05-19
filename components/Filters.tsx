@@ -13,7 +13,6 @@ const Filters: NextPage = () => {
   };
 
   const favToggleHandler = function () {
-    ctx.setLoading(true);
     ctx.toggleShowFav();
   };
 
