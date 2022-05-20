@@ -7,17 +7,17 @@ import {
 
 type context = {
   favorites: string[];
-  setFavorites: Function;
+  setFavorites: (id: string) => void;
   showFav: boolean;
-  toggleShowFav: Function;
+  toggleShowFav: () => void;
   searchTerm: string;
-  setSearchTerm: Function;
+  setSearchTerm: (term: string) => void;
   page: string;
-  setPage: Function;
+  setPage: (next: boolean) => void;
   perPage: string;
-  setPerPage: Function;
+  setPerPage: (page: string) => void;
   loading: boolean;
-  setLoading: Function;
+  setLoading: (state: boolean) => void;
 };
 
 const initialFavorites: string[] =
@@ -101,7 +101,7 @@ export const CtxProvider: React.FC<{ children: ReactNode }> = ({
     setLoading(state);
   };
 
-  const ctxValue = {
+  const ctxValue: context = {
     favorites,
     setFavorites: setFavoritesHandler,
     showFav,
