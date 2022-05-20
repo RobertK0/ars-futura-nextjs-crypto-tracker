@@ -78,22 +78,19 @@ export const CtxProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const searchTermChangeHandler = function (term: string) {
-    setLoading(true);
     setPage("1");
     setPerPage(term ? "250" : "10");
     setSearchTerm(term);
   };
 
   const setPageHandler = function (next: boolean) {
-    setPage((curPage) => {
-      const targetPage = !next
+    setPage((curPage) =>
+      !next
         ? curPage !== "1"
           ? `${+curPage - 1}`
           : "1"
-        : `${+curPage + 1}`;
-      if (targetPage !== curPage) setLoading(true);
-      return targetPage;
-    });
+        : `${+curPage + 1}`
+    );
   };
 
   const setPerPageHandler = function (page: string) {

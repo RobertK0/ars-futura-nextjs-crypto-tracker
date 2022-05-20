@@ -43,14 +43,14 @@ const Coin: NextPage<{ coin: CoinType }> = ({ coin }) => {
           </span>
         </div>
         <span className={styles["cur-price"]}>
-          $ {formatCur(coin.current_price)}
+          ${formatCur(coin.current_price)}
         </span>
         <span
           className={`${styles24h} ${styles.center}`}
         >{`${coin.price_change_percentage_24h?.toFixed(2)}%`}</span>
-        <span className={styles.ath}>$ {formatCur(coin.ath)}</span>
+        <span className={styles.ath}>${formatCur(coin.ath)}</span>
         <span className={styles.mcap}>
-          $ {formatCur(coin.market_cap)}
+          ${formatCur(coin.market_cap)}
         </span>
       </div>
     </Link>

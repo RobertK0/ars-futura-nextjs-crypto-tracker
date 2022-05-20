@@ -37,7 +37,9 @@
 .pos {
   color: #69db7c;
 }
-
+.pos::before {
+  content: "+";
+}
 .neg {
   color: #fa5252;
 }
