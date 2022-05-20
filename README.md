@@ -23,6 +23,7 @@ Content:
 
 # TODO:
 
+- Context doesn't seem to be working nicely when there are multiple state updates at the same time, maybe I should try Redux
 - ~~Definitely should use a graphing library for the price graphs, instead of mapping 168 svg containing divs for each data point and drawing svg lines between them; was curious though if I could hack it together~~ done
 - ~~Figure out how to make charts inherit fonts upon loadingdone~~ done
 - ~~Automatic price updating every X minutes~~ done
